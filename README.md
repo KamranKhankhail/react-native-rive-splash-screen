@@ -65,6 +65,8 @@ Update `AppDelegate.m` with the following additions:
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+
+// import goes here
 @import react_native_rive_splash_screen
 
 @implementation AppDelegate
