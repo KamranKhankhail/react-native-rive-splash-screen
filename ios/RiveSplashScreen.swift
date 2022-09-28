@@ -67,9 +67,11 @@ public class RiveSplashScreen: NSObject {
                * Rive animation code ends here.
                */
             } else {
-              RiveSplashScreen.loadingView = vc.view
-              frame.origin = CGPointMake(0, 0);
-              loadingView.frame = frame!;
+                RiveSplashScreen.loadingView = vc.view
+                // background color makes sure edges are not transparent
+                // otherwise, tabs screen is visible from edges.
+                RiveSplashScreen.loadingView?.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.00)
+                RiveSplashScreen.loadingView?.frame = frame!
             }
         }
 
@@ -87,8 +89,8 @@ public class RiveSplashScreen: NSObject {
             })
         } else {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-                RiveSplashScreen.riveViewModel!.stop()
-                RiveSplashScreen.loadingView!.removeFromSuperview()
+                RiveSplashScreen.riveViewModel?.stop()
+                RiveSplashScreen.loadingView?.removeFromSuperview()
             })
         }
     }

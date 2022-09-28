@@ -71,12 +71,22 @@ Update `AppDelegate.m` with the following additions:
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // ...other code
+  // ... rest of code
 
-    [RNSplashScreen show];  // here
-    // or
-    //[RNSplashScreen showSplash:@"LaunchScreen" inRootView:rootView];
-    return YES;
+  self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+  UIViewController *rootViewController = [self.reactDelegate createRootViewController];
+  rootViewController.view = rootView;
+  self.window.rootViewController = rootViewController;
+
+  [self.window makeKeyAndVisible];
+
+  // show splash screen, with rive animation support.
+  // it is mandatory to show splash here after self.window is visible.
+  RiveSplashScreen *riveSplashScreen = [RiveSplashScreen staticInstance];
+  [riveSplashScreen showSplash:@"SplashScreen" inRootView:rootView withArtboard:nil withRiveFile:@"loadingscreen"];
+
+  [super application:application didFinishLaunchingWithOptions:launchOptions];
+  return YES;
 }
 
 @end
