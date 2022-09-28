@@ -6,16 +6,12 @@ Works on `iOS and Android`& written in `Swift & Kotlin`.
 ## Content
 
 - [Installation](#installation)
-- [Examples](#examples)
 - [Getting started](#getting-started)
 - [API](#api)
 - [Testing](#testing)
 - [Troubleshooting](#troubleshooting)
 - [Contribution](#contribution)
 
-
-## Examples
-* [Examples](https://github.com/crazycodeboy/react-native-splash-screen/tree/master/examples)
 
 ## Installation
 
@@ -67,7 +63,7 @@ Update `AppDelegate.m` with the following additions:
 #import <React/RCTRootView.h>
 
 // import goes here
-@import react_native_rive_splash_screen
+@import react_native_rive_splash_screen;
 
 @implementation AppDelegate
 
@@ -150,7 +146,7 @@ Open `android/app/src/main/res/values/styles.xml` and add `<item name="android:w
 </resources>
 ```
 
-**To learn more see [examples](https://github.com/crazycodeboy/react-native-splash-screen/tree/master/examples)**
+**To learn more see [examples](https://github.com/KamranKhankhail/react-native-rive-splash-screen/tree/main/example)**
 
 
 If you want to customize the color of the status bar when the splash screen is displayed:
@@ -192,7 +188,7 @@ Customize your splash screen via `LaunchScreen.storyboard` or `LaunchScreen.xib`
 Use like so:
 
 ```javascript
-import SplashScreen from 'react-native-splash-screen'
+import SplashScreen from 'react-native-rive-splash-screen'
 
 export default class WelcomePage extends Component {
 
@@ -210,7 +206,7 @@ export default class WelcomePage extends Component {
 | Method | Type     | Optional | Description                         |
 |--------|----------|----------|-------------------------------------|
 | show() | function | false    | Open splash screen (Native Method ) |
-| show(final Activity activity, final boolean fullScreen) | function | false    | Open splash screen (Native Method ) |
+| showSplash(splashScreen: String?, inRootView rootView: UIView?, withArtboard artboardName: String? = nil, withRiveFile fileName: String?) | function | false    | Open splash screen (Native Method ) |
 | hide() | function | false    | Close splash screen                 |
 
 ## Testing
