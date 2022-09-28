@@ -6,15 +6,11 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo managed workflow\n';
 
-const RiveSplashScreen = NativeModules.RiveSplashScreen  ? NativeModules.RiveSplashScreen  : new Proxy(
+export default (NativeModules.RiveSplashScreen  ? NativeModules.RiveSplashScreen  : new Proxy(
       {},
       {
         get() {
           throw new Error(LINKING_ERROR);
         },
       }
-    );
-
-export function multiply(a: number, b: number): Promise<number> {
-  return RiveSplashScreen.multiply(a, b);
-}
+    ));
