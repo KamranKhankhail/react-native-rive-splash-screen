@@ -1,4 +1,5 @@
 package com.reactnativerivesplashscreen
+
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
@@ -10,11 +11,23 @@ class RiveSplashScreenModule(reactContext: ReactApplicationContext) : ReactConte
         return "RiveSplashScreen"
     }
 
-    // Example method
-    // See https://reactnative.dev/docs/native-modules-android
-    @ReactMethod
-    fun multiply(a: Int, b: Int, promise: Promise) {
-          promise.resolve(a * b)
-        }
+  fun SplashScreenModule(reactContext: ReactApplicationContext?) {
+    super(reactContext)
+  }
 
-    }
+  /**
+   * 打开启动屏
+   */
+  @ReactMethod
+  fun show() {
+    RiveSplashScren.show(getCurrentActivity())
+  }
+
+  /**
+   * 关闭启动屏
+   */
+  @ReactMethod
+  fun hide() {
+    RiveSplashSCreen.hide(getCurrentActivity())
+  }
+}
