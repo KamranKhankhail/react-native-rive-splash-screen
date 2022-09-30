@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.os.Build
 import android.view.WindowManager
+import app.rive.runtime.kotlin.RiveAnimationView
 import java.lang.ref.WeakReference
 
 /**
@@ -19,13 +20,18 @@ class RiveSplashScreen {
     /**
      * 打开启动屏
      */
-    fun show(activity: Activity?, themeResId: Int, fullScreen: Boolean) {
+    fun show(activity: Activity?, themeResId: Int, fullScreen: Boolean , riveArtboardName: String = "") {
       if (activity == null) return
       mActivity = WeakReference(activity)
       activity.runOnUiThread(Runnable {
         if (!activity.isFinishing) {
           mSplashDialog = Dialog(activity, themeResId)
+          //set rive art board name for give view in launch screen
           mSplashDialog!!.setContentView(R.layout.launch_screen)
+          if(!riveArtboardName.isNullOrEmpty()) {
+            val riveAnimationView: RiveAnimationView = mSplashDialog!!.findViewById<RiveAnimationView>(R.id.rive_animation_view)
+            riveAnimationView.artboardName = riveArtboardName;
+          }
           mSplashDialog!!.setCancelable(false)
           if (fullScreen) {
             setActivityAndroidP(mSplashDialog)
@@ -43,9 +49,9 @@ class RiveSplashScreen {
      * 打开启动屏
      */
     @JvmOverloads
-    fun show(activity: Activity?, fullScreen: Boolean = false) {
+    fun show(activity: Activity?, fullScreen: Boolean = false , riveArtboardName: String = "") {
       val resourceId = if (fullScreen) R.style.SplashScreen_Fullscreen else R.style.SplashScreen_SplashTheme
-      show(activity, resourceId, fullScreen)
+      show(activity, resourceId, fullScreen, riveArtboardName)
     }
 
     /**

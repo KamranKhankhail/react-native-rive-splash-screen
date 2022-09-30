@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item type="layout" name="launch_screen">
-        @layout/launch_screen
-    </item>
+  <item type="layout" name="launch_screen">
+    @layout/launch_screen
+  </item>
+
+  <item type="id" name="rive_animation_view" />
 </resources>
