@@ -11,16 +11,12 @@ class RiveSplashScreenModule(reactContext: ReactApplicationContext) : ReactConte
         return "RiveSplashScreen"
     }
 
-  fun SplashScreenModule(reactContext: ReactApplicationContext?) {
-    super(reactContext)
-  }
-
   /**
    * 打开启动屏
    */
   @ReactMethod
   fun show() {
-    RiveSplashScren.show(getCurrentActivity())
+    RiveSplashScreen.show(getCurrentActivity())
   }
 
   /**
@@ -28,6 +24,6 @@ class RiveSplashScreenModule(reactContext: ReactApplicationContext) : ReactConte
    */
   @ReactMethod
   fun hide() {
-    RiveSplashSCreen.hide(getCurrentActivity())
+    RiveSplashScreen.hide(getCurrentActivity())
   }
 }

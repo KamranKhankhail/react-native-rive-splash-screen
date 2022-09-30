@@ -133,8 +133,8 @@ dependencies {
     //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation 'app.rive:rive-android:+'
-  implementation "androidx.startup:startup-runtime:+"
+  implementation 'app.rive:rive-android:3.0.9'
+  implementation "androidx.startup:startup-runtime:1.1.0"
 // From node_modules
 }
 

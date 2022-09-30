@@ -38,8 +38,7 @@ Update the `MainActivity.java` to use `react-native-rive-splash-screen` via the 
 ```java
 import android.os.Bundle; // here
 import com.facebook.react.ReactActivity;
-// react-native-splash-screen < 0.3.1
-import com.react.native.rive.splash.screen; // here
+import com.reactnativerivesplashscreen.RiveSplashScreen; // here
 
 public class MainActivity extends ReactActivity {
    @Override
