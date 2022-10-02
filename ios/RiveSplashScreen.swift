@@ -9,7 +9,10 @@ public class RiveSplashScreen: NSObject {
     public static var waiting: Bool = true;
     public static var addedJsLoadErrorObserver: Bool = false;
     public static var loadingView: UIView? = nil;
-    public static var riveViewModel: RiveViewModel? = nil
+    public static var riveViewModel: RiveViewModel? = nil;
+
+    // number of seconds since 1970
+    public static var splashScreenDisplayedAt: Double = Date().timeIntervalSince1970;
 
     func methodQueue() -> DispatchQueue {
         return DispatchQueue.main
@@ -29,8 +32,8 @@ public class RiveSplashScreen: NSObject {
     }
 
     //  Converted to Swift 5.7 by Swiftify v5.7.25750 - https://swiftify.com/
-    @objc(showSplash:inRootView:withArtboard:withRiveFile:)
-    public func showSplash(_ splashScreen: String?, inRootView rootView: UIView?, withArtboard artboardName: String? = nil, withRiveFile fileName: String?) {
+    @objc(showSplash:inRootView:withArtboard:withRiveFile:withStateMachine:)
+    public func showSplash(_ splashScreen: String?, inRootView rootView: UIView?, withArtboard artboardName: String? = nil, withRiveFile fileName: String? = nil, withStateMachine stateMachine: String?) {
         if (RiveSplashScreen.loadingView == nil) {
             let vc = UIStoryboard(name: "SplashScreen", bundle: nil).instantiateViewController(withIdentifier: "SplashViewController")
             var frame = rootView?.frame
@@ -47,7 +50,11 @@ public class RiveSplashScreen: NSObject {
               mainContainer.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.00)
 
               // create rive modal
-              RiveSplashScreen.riveViewModel = RiveViewModel(fileName: fileName!, artboardName: artboardName)
+                RiveSplashScreen.riveViewModel = RiveViewModel(
+                    fileName: fileName!,
+                    stateMachineName: stateMachine ?? nil,
+                    artboardName: artboardName ?? nil
+                )
 
               // create rive view
               let riveView = RiveSplashScreen.riveViewModel!.createRView()
@@ -78,6 +85,7 @@ public class RiveSplashScreen: NSObject {
         RiveSplashScreen.waiting = false
 
         rootView!.addSubview(RiveSplashScreen.loadingView!)
+        RiveSplashScreen.splashScreenDisplayedAt = Date().timeIntervalSince1970;
     }
 
     //  Converted to Swift 5.7 by Swiftify v5.7.25750 - https://swiftify.com/
@@ -98,5 +106,11 @@ public class RiveSplashScreen: NSObject {
     public func jsLoadError(_ notification: Notification?) {
         // If there was an error loading javascript, hide the splash screen so it can be shown.  Otherwise the splash screen will remain forever, which is a hassle to debug.
         self.hide()
+    }
+
+    @objc
+    func constantsToExport() -> [String: Any]! {
+        // number of seconds since 1970
+        return ["splashScreenDisplayedAt": RiveSplashScreen.splashScreenDisplayedAt]
     }
 }

@@ -2,7 +2,7 @@
 
 @interface RCT_EXTERN_MODULE(RiveSplashScreen, NSObject)
 
-RCT_EXTERN_METHOD(showSplash:(NSString *)splashScreen inRootView:(UIView*)rootView withArtboard:(NSString *)artboardName withRiveFile:(NSString *)fileName)
+RCT_EXTERN_METHOD(showSplash:(NSString *)splashScreen inRootView:(UIView*)rootView withArtboard:(NSString *)artboardName withRiveFile:(NSString *)fileName withStateMachine:(NSString *)stateMachine)
 
 RCT_EXTERN_METHOD(show)
 
