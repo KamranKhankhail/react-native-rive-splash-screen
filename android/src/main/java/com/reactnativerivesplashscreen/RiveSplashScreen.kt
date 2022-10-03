@@ -16,6 +16,8 @@ class RiveSplashScreen {
   companion object {
     private var mSplashDialog: Dialog? = null
     private var mActivity: WeakReference<Activity>? = null
+    var splashScreenDisplayedAt: Long = System.currentTimeMillis();
+
 
     /**
      * 打开启动屏
@@ -39,6 +41,7 @@ class RiveSplashScreen {
           if (!mSplashDialog!!.isShowing) {
             mSplashDialog!!.show()
           }
+          splashScreenDisplayedAt = System.currentTimeMillis();
         }
       })
     }

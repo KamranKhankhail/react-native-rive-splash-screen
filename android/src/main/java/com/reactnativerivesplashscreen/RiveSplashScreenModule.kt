@@ -11,6 +11,14 @@ class RiveSplashScreenModule(reactContext: ReactApplicationContext) : ReactConte
         return "RiveSplashScreen"
     }
 
+
+  override fun getConstants(): Map<String, Long>? {
+    val constants: MutableMap<String, Long> = HashMap()
+    // this conversion from millis to seconds is for consistency with ios.
+    constants["splashScreenDisplayedAt"] = RiveSplashScreen.splashScreenDisplayedAt / 1000;
+    return constants
+  }
+
   /**
    * 打开启动屏
    */
