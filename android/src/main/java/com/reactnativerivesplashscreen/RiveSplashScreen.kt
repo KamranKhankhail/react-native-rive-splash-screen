@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.os.Build
 import android.view.WindowManager
+import android.widget.ImageView
 import app.rive.runtime.kotlin.RiveAnimationView
 import java.lang.ref.WeakReference
 
@@ -30,9 +31,13 @@ class RiveSplashScreen {
           mSplashDialog = Dialog(activity, themeResId)
           //set rive art board name for give view in launch screen
           mSplashDialog!!.setContentView(R.layout.launch_screen)
-          if(!riveArtboardName.isNullOrEmpty()) {
-            val riveAnimationView: RiveAnimationView = mSplashDialog!!.findViewById<RiveAnimationView>(R.id.rive_animation_view)
+          val riveAnimationView: RiveAnimationView = mSplashDialog!!.findViewById<RiveAnimationView>(R.id.rive_animation_view);
+          if(riveArtboardName.isNullOrEmpty()) {
             riveAnimationView.artboardName = riveArtboardName;
+          } else {
+            val splashImageView: ImageView = mSplashDialog!!.findViewById(R.id.splash_image_view);
+            splashImageView.visibility = android.view.View.VISIBLE;
+            riveAnimationView.visibility = android.view.View.GONE;
           }
           mSplashDialog!!.setCancelable(false)
           if (fullScreen) {
