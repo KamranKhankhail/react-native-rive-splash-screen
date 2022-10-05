@@ -32,7 +32,7 @@ class RiveSplashScreen {
           //set rive art board name for give view in launch screen
           mSplashDialog!!.setContentView(R.layout.launch_screen)
           val riveAnimationView: RiveAnimationView = mSplashDialog!!.findViewById<RiveAnimationView>(R.id.rive_animation_view);
-          if(riveArtboardName.isNullOrEmpty()) {
+          if(!riveArtboardName.isNullOrEmpty()) {
             riveAnimationView.artboardName = riveArtboardName;
           } else {
             val splashImageView: ImageView = mSplashDialog!!.findViewById(R.id.splash_image_view);

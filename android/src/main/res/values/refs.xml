@@ -5,4 +5,5 @@
   </item>
 
   <item type="id" name="rive_animation_view" />
+  <item type="id" name="splash_image_view" />
 </resources>
