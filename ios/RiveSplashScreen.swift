@@ -88,6 +88,31 @@ public class RiveSplashScreen: NSObject {
         RiveSplashScreen.splashScreenDisplayedAt = Date().timeIntervalSince1970;
     }
 
+    @objc(showSplashImage:inRootView:withSplashImage:)
+    public func showSplashImage(_ splashScreen: String?, inRootView rootView: UIView?, withSplashImage splashImageName: String? = nil) {
+        let vc = UIStoryboard(name: "SplashScreen", bundle: nil).instantiateViewController(withIdentifier: "SplashViewController")
+        var frame = rootView.frame
+        frame.origin = CGPoint(x: 0, y: 0)
+
+        let mainContainer = UIView(frame: frame)
+        let ivSplash = UIImageView(frame: frame)
+
+        let splashImage = UIImage(named: splashImageName)
+
+        ivSplash.image = splashImage
+
+        mainContainer.addSubview(ivSplash)
+
+        loadingView = vc.view
+
+        loadingView.addSubview(mainContainer)
+
+        RiveSplashScreen.waiting = false
+
+        rootView!.addSubview(RiveSplashScreen.loadingView!)
+    }
+
+
     //  Converted to Swift 5.7 by Swiftify v5.7.25750 - https://swiftify.com/
     @objc(hide)
     public func hide() {
