@@ -14,6 +14,9 @@ public class RiveSplashScreen: NSObject {
     // number of seconds since 1970
     public static var splashScreenDisplayedAt: Double = Date().timeIntervalSince1970;
 
+    // this saves the name of the splash image that is displayed during current run of the app.
+    public static var nameOfSplashImageDisplayed: String = "";
+
     func methodQueue() -> DispatchQueue {
         return DispatchQueue.main
     }
@@ -89,13 +92,15 @@ public class RiveSplashScreen: NSObject {
     }
 
     @objc(showSplashImage:inRootView:withSplashImage:)
-    public func showSplashImage(_ splashScreen: String?, inRootView rootView: UIView?, withSplashImage splashImageName: String? = nil) {
-        let vc = UIStoryboard(name: "SplashScreen", bundle: nil).instantiateViewController(withIdentifier: "SplashViewController")
-        var frame = rootView.frame
-        frame.origin = CGPoint(x: 0, y: 0)
+    public func showSplashImage(_ splashScreen: String?, inRootView rootView: UIView?, withSplashImage splashImageName: String) {
+        RiveSplashScreen.nameOfSplashImageDisplayed = splashImageName
 
-        let mainContainer = UIView(frame: frame)
-        let ivSplash = UIImageView(frame: frame)
+        let vc = UIStoryboard(name: "SplashScreen", bundle: nil).instantiateViewController(withIdentifier: "SplashViewController")
+        var frame = rootView?.frame
+        frame?.origin = CGPoint(x: 0, y: 0)
+
+        let mainContainer = UIView(frame: frame!)
+        let ivSplash = UIImageView(frame: frame!)
 
         let splashImage = UIImage(named: splashImageName)
 
@@ -103,9 +108,9 @@ public class RiveSplashScreen: NSObject {
 
         mainContainer.addSubview(ivSplash)
 
-        loadingView = vc.view
+        RiveSplashScreen.loadingView = vc.view
 
-        loadingView.addSubview(mainContainer)
+        RiveSplashScreen.loadingView!.addSubview(mainContainer)
 
         RiveSplashScreen.waiting = false
 
@@ -122,7 +127,6 @@ public class RiveSplashScreen: NSObject {
             })
         } else {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-                RiveSplashScreen.riveViewModel?.stop()
                 RiveSplashScreen.loadingView?.removeFromSuperview()
             })
         }
@@ -136,6 +140,9 @@ public class RiveSplashScreen: NSObject {
     @objc
     func constantsToExport() -> [String: Any]! {
         // number of seconds since 1970
-        return ["splashScreenDisplayedAt": RiveSplashScreen.splashScreenDisplayedAt]
+        return [
+            "splashScreenDisplayedAt": RiveSplashScreen.splashScreenDisplayedAt,
+            "nameOfSplashImageDisplayed": RiveSplashScreen.nameOfSplashImageDisplayed
+        ]
     }
 }
